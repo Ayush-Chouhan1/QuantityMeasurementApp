@@ -22,6 +22,7 @@ public class Quantity {
 		Quantity other = (Quantity) obj;
 
 		return Double.compare(this.value, other.value) == 0 && this.unit == other.unit;
+		
 	}
 
 }

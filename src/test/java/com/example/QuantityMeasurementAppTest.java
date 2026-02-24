@@ -107,5 +107,6 @@ public class QuantityMeasurementAppTest {
 		Quantity q1 = new Quantity(1.0, Unit.FEET);
 		assertTrue(q1.equals(q1));
 	}
+	
 
 }

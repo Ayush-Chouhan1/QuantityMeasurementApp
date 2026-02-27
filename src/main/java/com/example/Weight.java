@@ -9,6 +9,8 @@ public class Weight {
 			throw new IllegalArgumentException("Unit cannot be null");
 		if (!Double.isFinite(value))
 			throw new IllegalArgumentException("Invalid value");
+		
+		
 
 		this.value = value;
 		this.unit = unit;

@@ -12,7 +12,6 @@ public class QuantityMeasurementApp {
 	public static <U extends IMeasurable> Quantity<U> demonstrateConversion(Quantity<U> quantity, U targetUnit) {
 		return quantity.convertTo(targetUnit);
 	}
-	
 
 	// generic addition (implicit target unit)
 	public static <U extends IMeasurable> Quantity<U> demonstrateAddition(Quantity<U> quantity1,

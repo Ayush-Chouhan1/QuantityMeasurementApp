@@ -15,6 +15,8 @@ public enum WeightUnit implements IMeasurable {
 
     @Override
     public double getConversionFactor() {
+    	
+    	
         return conversionFactor;
     }
 

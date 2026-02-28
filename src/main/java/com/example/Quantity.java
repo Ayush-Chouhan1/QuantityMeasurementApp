@@ -17,6 +17,8 @@ public class Quantity<U extends IMeasurable> {
 	}
 
 	public double getValue() {
+		
+		
 		return value;
 	}
 

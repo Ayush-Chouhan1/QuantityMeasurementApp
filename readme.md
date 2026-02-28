@@ -1,4 +1,4 @@
-# UC11 — Volume Measurement Support
+# UC12 — Volume Measurement Support
 
 This use case demonstrates the scalability of the generic Quantity architecture by introducing a new measurement category Volume without modifying existing classes.
 
@@ -33,3 +33,4 @@ Cross-category safety
 Precision & immutability
 
 This UC proves the system is open for extension and closed for modification (OCP).
+

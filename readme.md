@@ -30,6 +30,3 @@ Equal: true
 - Type safety
 - Encapsulation
 - Unit testing basics
-
-- ##
-

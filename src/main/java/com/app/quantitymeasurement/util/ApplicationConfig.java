@@ -1,4 +1,4 @@
-package main.java.com.app.quantitymeasurement.util;
+package com.app.quantitymeasurement.util;
 
 import java.io.InputStream;
 import java.util.Properties;

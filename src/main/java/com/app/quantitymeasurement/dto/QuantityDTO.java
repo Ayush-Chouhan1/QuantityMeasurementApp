@@ -1,4 +1,4 @@
-package main.java.com.app.quantitymeasurement.dto;
+package com.app.quantitymeasurement.dto;
 
 public class QuantityDTO {
 

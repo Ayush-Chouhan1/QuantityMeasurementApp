@@ -1,8 +1,9 @@
-package main.java.com.app.quantitymeasurement;
+package com.app.quantitymeasurement;
 
-import com.app.quantitymeasurement.entity.QuantityMeasurementEntity;
-import com.app.quantitymeasurement.repository.*;
-import com.app.quantitymeasurement.util.*;
+import com.app.quantitymeasurement.entitiy.QuantityMeasurementEntity;
+import com.app.quantitymeasurement.repository.IQuantityMeasurementRepository;
+import com.app.quantitymeasurement.repository.QuantityMeasurementDatabaseRepository;
+import com.app.quantitymeasurement.util.ConnectionPool;
 
 public class QuantityMeasurementApp {
 

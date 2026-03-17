@@ -1,9 +1,9 @@
-package main.java.com.app.quantitymeasurement.controller;
-
-import com.app.quantitymeasurement.entity.QuantityMeasurementEntity;
-import com.app.quantitymeasurement.service.IQuantityMeasurementService;
+package com.app.quantitymeasurement.controller;
 
 import java.util.List;
+
+import com.app.quantitymeasurement.entitiy.QuantityMeasurementEntity;
+import com.app.quantitymeasurement.service.IQuantityMeasurementService;
 
 public class QuantityMeasurementController {
 

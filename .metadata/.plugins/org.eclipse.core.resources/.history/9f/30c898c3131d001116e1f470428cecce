@@ -1,0 +1,31 @@
+package sampleDI.main;
+
+public class Student {
+	
+	String name;
+	String rollno;
+	Address address;
+	
+	public String display() {
+		return "name - " +  name + " rollno - " + rollno + " address - " + address;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getRollno() {
+		return rollno;
+	}
+	public void setRollno(String rollno) {
+		this.rollno = rollno;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+}

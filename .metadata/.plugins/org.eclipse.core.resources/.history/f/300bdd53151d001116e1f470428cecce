@@ -1,0 +1,21 @@
+package sampleDI.main;
+
+public class Address {
+
+	String city;
+	String state;
+	String pin;
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+	
+	public String toString(){
+		return "City - " + city + " State - " + state + " pin - "  + pin;
+	}
+}

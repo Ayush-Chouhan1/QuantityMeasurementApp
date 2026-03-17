@@ -1,4 +1,4 @@
-package main.java.com.app.quantitymeasurement.model;
+package com.app.quantitymeasurement.model;
 public class QuantityModel {
 
     private double value;

@@ -1,9 +1,9 @@
-package main.java.com.app.quantitymeasurement.service;
-
-import com.app.quantitymeasurement.entity.QuantityMeasurementEntity;
-import com.app.quantitymeasurement.repository.IQuantityMeasurementRepository;
+package com.app.quantitymeasurement.service;
 
 import java.util.List;
+
+import com.app.quantitymeasurement.entitiy.QuantityMeasurementEntity;
+import com.app.quantitymeasurement.repository.IQuantityMeasurementRepository;
 
 public class QuantityMeasurementServiceImpl
         implements IQuantityMeasurementService {

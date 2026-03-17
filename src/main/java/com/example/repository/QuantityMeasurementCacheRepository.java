@@ -1,4 +1,4 @@
-package com.example.repositroy;
+package com.example.repository;
 import com.example.entity.QuantityMeasurementEntity;
 import java.util.ArrayList;
 import java.util.List;

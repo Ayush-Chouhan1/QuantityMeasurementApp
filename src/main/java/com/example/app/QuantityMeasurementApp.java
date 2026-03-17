@@ -8,14 +8,11 @@ public class QuantityMeasurementApp {
 
     public static void main(String[] args) {
 
-        QuantityMeasurementCacheRepository repository =
-                QuantityMeasurementCacheRepository.getInstance();
+        QuantityMeasurementCacheRepository repository =QuantityMeasurementCacheRepository.getInstance();
 
-        IQuantityMeasurementService service =
-                new QuantityMeasurementServiceImpl(repository);
+        IQuantityMeasurementService service = new QuantityMeasurementServiceImpl(repository);
 
-        QuantityMeasurementController controller =
-                new QuantityMeasurementController(service);
+        QuantityMeasurementController controller =  new QuantityMeasurementController(service);
 
         controller.performAddition();
         controller.performComparison();

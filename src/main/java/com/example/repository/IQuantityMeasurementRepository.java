@@ -1,10 +1,11 @@
-package com.example.repositroy;
+package com.example.repository;
+
 import com.example.entity.QuantityMeasurementEntity;
 import java.util.List;
 
 public interface IQuantityMeasurementRepository {
 
-    void save(QuantityMeasurementEntity entity);
+	void save(QuantityMeasurementEntity entity);
 
-    List<QuantityMeasurementEntity> findAll();
+	List<QuantityMeasurementEntity> findAll();
 }

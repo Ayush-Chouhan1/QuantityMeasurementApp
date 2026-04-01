@@ -1,42 +1,83 @@
 package com.app.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import com.app.security.JwtAuthFilter;
+import com.app.security.OAuth2SuccessHandler;
+
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 
 @Configuration
-@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	private final JwtAuthFilter jwtAuthFilter;
+	private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
-        http
-            // Disable CSRF for REST API
-            .csrf(csrf->csrf.disable())
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-            // Allow all requests for development
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/api/v1/quantities/**",  // REST API endpoints
-                    "/h2-console/**",          // H2 Console
-                    "/swagger-ui/**",          // Swagger UI
-                    "/swagger-ui.html",        // Swagger UI HTML
-                    "/api-docs/**",            // OpenAPI docs
-                    "/actuator/**"             // Actuator endpoints
-                ).permitAll()
-                .anyRequest().permitAll()
-            )
+		http.cors(cors -> {
+		}).csrf(csrf -> csrf.disable())
 
-            // Allow H2 console frames
-            .headers(headers -> headers
-                .frameOptions(frameOptions -> frameOptions.disable())
-            );
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**", "/swagger-ui/**", "/swagger-ui.html",
+						"/v3/api-docs/**", "/api-docs/**", "/h2-console/**").permitAll().anyRequest().authenticated()
+				// .anyRequest().permitAll() -> for testing
+				)
 
-        return http.build();
-    }
+				.oauth2Login(oauth -> oauth.successHandler(oAuth2SuccessHandler))
+				.exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) -> {
+					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+					response.setContentType("application/json");
+					response.getWriter().write("{\"error\": \"Unauthorized\"}");
+				}))
 
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+
+				.headers(headers -> headers.frameOptions(frame -> frame.disable()));
+
+		return http.build();
+	}
+
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+		return config.getAuthenticationManager();
+	}
+
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration config = new CorsConfiguration();
+
+		config.setAllowedOrigins(List.of("http://localhost:5173")); // React
+		config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		config.setAllowedHeaders(List.of("*"));
+		config.setAllowCredentials(true);
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", config);
+
+		return source;
+	}
 }

@@ -114,6 +114,23 @@
 		<!-- ✅ REMOVED: spring-boot-starter-webmvc-test (doesn't exist) -->
 		<!-- ✅ REMOVED: spring-boot-h2console (not needed, H2 console is
 		auto-configured) -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -132,6 +149,9 @@
 				<configuration>
 					<source>17</source>
 					<target>17</target>
+					<excludes>
+						<exclude>com/app/quantitymeasurement/**/*.java</exclude>
+					</excludes>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>

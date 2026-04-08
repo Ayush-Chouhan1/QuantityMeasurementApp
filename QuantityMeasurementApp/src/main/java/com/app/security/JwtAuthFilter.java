@@ -14,14 +14,17 @@ import com.app.service.JwtService;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
-import lombok.RequiredArgsConstructor;
 
 @Component
-@RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
 	private final JwtService jwtService;
 	private final CustomUserDetailsService userDetailsService;
+
+	public JwtAuthFilter(JwtService jwtService, CustomUserDetailsService userDetailsService) {
+		this.jwtService = jwtService;
+		this.userDetailsService = userDetailsService;
+	}
 	
 	@Override
 	protected void doFilterInternal(

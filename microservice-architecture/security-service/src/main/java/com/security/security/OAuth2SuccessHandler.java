@@ -5,7 +5,6 @@ import com.security.repository.UserRepository;
 import com.security.service.JwtService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -14,11 +13,15 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-@RequiredArgsConstructor
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final UserRepository repository;
     private final JwtService jwtService;
+
+    public OAuth2SuccessHandler(UserRepository repository, JwtService jwtService) {
+        this.repository = repository;
+        this.jwtService = jwtService;
+    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,

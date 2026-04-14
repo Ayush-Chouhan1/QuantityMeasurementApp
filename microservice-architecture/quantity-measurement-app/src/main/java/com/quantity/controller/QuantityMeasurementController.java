@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/quantities")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(originPatterns = { "http://localhost:*", "http://127.0.0.1:*", "https://localhost:*", "https://127.0.0.1:*" })
 @Tag(name = "Quantity Measurements", description = "REST API for quantity measurement operations")
 public class QuantityMeasurementController {
 

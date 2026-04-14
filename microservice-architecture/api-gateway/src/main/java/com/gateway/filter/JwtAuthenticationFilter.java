@@ -2,7 +2,6 @@ package com.gateway.filter;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 
@@ -104,7 +103,7 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
 	}
 
 	private SecretKey getSigningKey() {
-		byte[] keyBytes = Decoders.BASE64.decode(secret);
+		byte[] keyBytes = secret.getBytes(StandardCharsets.UTF_8);
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
 }

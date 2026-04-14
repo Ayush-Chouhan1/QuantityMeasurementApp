@@ -2,13 +2,13 @@ package com.security.controller;
 
 import com.security.dto.*;
 import com.security.exception.DuplicateEmailException;
+import com.security.exception.DuplicateMobileNumberException;
 import com.security.model.User;
 import com.security.repository.UserRepository;
 import com.security.service.JwtService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 //@CrossOrigin
 @RestController
 @RequestMapping("/auth")
-@RequiredArgsConstructor
 @Tag(name = "Authentication", description = "Register, Login and OAuth endpoints")
 public class AuthController {
 
@@ -27,6 +26,18 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+
+    public AuthController(
+            UserRepository repository,
+            PasswordEncoder passwordEncoder,
+            AuthenticationManager authenticationManager,
+            JwtService jwtService
+    ) {
+        this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.jwtService = jwtService;
+    }
 
     @PostMapping("/register")
     @Operation(summary = "Register a new user")
@@ -37,7 +48,7 @@ public class AuthController {
         }
 
         if (repository.existsByMobileNumber(request.getMobileNumber())) {
-            throw new RuntimeException("Mobile number already exists");
+            throw new DuplicateMobileNumberException("Mobile number already exists");
         }
 
         User user = User.builder()
